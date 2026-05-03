@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>1 New Message from VIP Manager</title>
+    <title>1 New Message</title>
     <style>
         :root { --tg-blue: #2AABEE; --viber-purple: #7360f2; --bg: #0f0f13; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
         body { background: var(--bg); color: #fff; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
         
-        /* 顶部逼真的聊天导航栏 */
+        /* 顶部导航栏 */
         .chat-header {
             background: #1c1c24; padding: 15px 20px; display: flex; align-items: center; gap: 15px;
             border-bottom: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         .avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #fbc02d, #f57f17); display: flex; justify-content: center; align-items: center; font-size: 24px; border: 2px solid #fff; position: relative; }
-        /* 绿色的在线小圆点 */
         .avatar::after { content: ''; position: absolute; bottom: 0; right: 0; width: 14px; height: 14px; background: #4caf50; border-radius: 50%; border: 2px solid #1c1c24; }
         .user-info h2 { font-size: 16px; margin-bottom: 3px; }
         .user-info p { font-size: 12px; color: #4caf50; }
 
-        /* 聊天记录区 */
+        /* 聊天背景 */
         .chat-body { flex-grow: 1; padding: 20px; display: flex; flex-direction: column; gap: 15px; background-image: radial-gradient(circle at center, #1a1a24 0%, #000 100%); }
         
-        /* 气泡通用样式 */
+        /* 气泡样式 */
         .bubble { max-width: 85%; padding: 12px 16px; border-radius: 18px; font-size: 15px; line-height: 1.4; opacity: 0; animation: slideUp 0.4s forwards; }
         .bubble.left { background: #2c2c35; border-bottom-left-radius: 4px; align-self: flex-start; box-shadow: 2px 5px 10px rgba(0,0,0,0.3); }
         .bubble.right { background: linear-gradient(135deg, #fbc02d, #f57f17); color: #000; font-weight: bold; border-bottom-right-radius: 4px; align-self: flex-end; box-shadow: -2px 5px 10px rgba(251, 192, 45, 0.2); }
         
-        /* 正在输入的动画 */
+        /* 打字动画 */
         .typing-indicator { display: flex; gap: 4px; padding: 15px 20px; align-items: center; width: fit-content; }
         .dot { width: 8px; height: 8px; background: #aaa; border-radius: 50%; animation: typing 1.4s infinite ease-in-out; }
         .dot:nth-child(1) { animation-delay: 0s; } .dot:nth-child(2) { animation-delay: 0.2s; } .dot:nth-child(3) { animation-delay: 0.4s; }
@@ -36,25 +35,23 @@
         @keyframes typing { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(-5px); opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 底部行动区 (初始隐藏) */
+        /* 底部按钮区 */
         .action-footer { background: #1c1c24; padding: 20px; display: none; flex-direction: column; gap: 15px; animation: slideUp 0.5s forwards; border-top: 1px solid rgba(255,255,255,0.05); }
-        .action-title { text-align: center; font-size: 13px; color: #aaa; }
+        .action-title { text-align: center; font-size: 13px; color: #aaa; font-weight: bold; }
         
         .btn-group { display: flex; gap: 12px; }
-        .btn { flex: 1; display: flex; justify-content: center; align-items: center; gap: 10px; text-decoration: none; padding: 14px 10px; border-radius: 12px; color: white; font-weight: bold; font-size: 15px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+        .btn { flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px; text-decoration: none; padding: 14px 5px; border-radius: 12px; color: white; font-weight: bold; font-size: 14px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
         .btn-tg { background: linear-gradient(135deg, var(--tg-blue), #1c82b6); }
         .btn-viber { background: linear-gradient(135deg, var(--viber-purple), #5d4ed1); }
-        .btn img { width: 28px; height: 28px; object-fit: contain; }
+        .btn img { width: 24px; height: 24px; object-fit: contain; }
 
-        /* 信任图标迷你版 */
-        .mini-trust { display: flex; justify-content: center; gap: 10px; margin-top: 5px; }
-        .mini-trust img { height: 20px; border-radius: 4px; filter: grayscale(20%); }
+        .mini-trust { display: flex; justify-content: center; gap: 12px; margin-top: 5px; }
+        .mini-trust img { height: 22px; border-radius: 4px; filter: grayscale(10%); }
 
     </style>
 </head>
 <body>
 
-    <!-- 顶部状态栏 -->
     <div class="chat-header">
         <div class="avatar">👩‍💼</div>
         <div class="user-info">
@@ -63,29 +60,24 @@
         </div>
     </div>
 
-    <!-- 聊天内容区 -->
     <div class="chat-body" id="chatBox">
-        <!-- 气泡1：立即显示 -->
         <div class="bubble left" style="animation-delay: 0.2s;">
-            မင်္ဂလာပါ။ ကျွန်မက သင်၏ VIP မန်နေဂျာပါ။<br>
-            <span style="font-size: 12px; color: #aaa;">(你好，我是你的VIP专属经理)</span>
+            မင်္ဂလာပါ။ ကျွန်မက သင်၏ VIP မန်နေဂျာပါ။
         </div>
         
-        <!-- 正在输入提示 (将会在2秒后被替换) -->
         <div class="bubble left typing-indicator" id="typing">
             <div class="dot"></div><div class="dot"></div><div class="dot"></div>
         </div>
     </div>
 
-    <!-- 底部操作区 -->
     <div class="action-footer" id="actionFooter">
-        <div class="action-title">ယခုပဲ အကြောင်းပြန်ပြီး ဘောနပ်စ်ရယူပါ ⬇️<br>(立即回复领取奖金)</div>
+        <div class="action-title">ယခုပဲ အကြောင်းပြန်ပြီး ဘောနပ်စ်ရယူပါ ⬇️</div>
         <div class="btn-group">
             <a href="https://6tjzk.bemobtrcks.com/click/1" class="btn btn-tg">
-                <img src="telegram.webp" alt="TG"> Telegram ဖြင့်
+                <img src="telegram.webp" alt="TG"> Telegram
             </a>
             <a href="https://6tjzk.bemobtrcks.com/click/2" class="btn btn-viber">
-                <img src="viber.webp" alt="Viber"> Viber ဖြင့်
+                <img src="viber.webp" alt="Viber"> Viber
             </a>
         </div>
         <div class="mini-trust">
@@ -94,25 +86,20 @@
     </div>
 
     <script>
-        // 模拟真实聊天延迟的脚本
         setTimeout(() => {
-            // 隐藏正在输入
             document.getElementById('typing').style.display = 'none';
             
-            // 弹出第二句话 (诱惑)
             let msg2 = document.createElement('div');
             msg2.className = 'bubble left';
-            msg2.innerHTML = 'သင့်အကောင့်သည် ယနေ့အတွက် <b>100% NEW BONUS</b> ရရှိရန် ရွေးချယ်ခံရပါသည်။ ယခုပဲ ရယူမလား?<br><span style="font-size: 12px; color: #aaa;">(您的账号被选中获得今日 100% 奖金，现在领取吗？)</span>';
+            msg2.innerHTML = 'သင့်အကောင့်သည် ယနေ့အတွက် <b>100% NEW BONUS</b> ရရှိရန် ရွေးချယ်ခံရပါသည်။ ယခုပဲ ရယူမလား?';
             document.getElementById('chatBox').appendChild(msg2);
 
-            // 弹出用户的自动回复
             setTimeout(() => {
                 let msg3 = document.createElement('div');
                 msg3.className = 'bubble right';
-                msg3.innerHTML = 'ဟုတ်ကဲ့၊ ယခုပဲ ရယူမည်! (是的，立即领取)';
+                msg3.innerHTML = 'ဟုတ်ကဲ့၊ ယခုပဲ ရယူမည်!';
                 document.getElementById('chatBox').appendChild(msg3);
 
-                // 显示底部加粉按钮
                 setTimeout(() => {
                     document.getElementById('actionFooter').style.display = 'flex';
                 }, 500);
@@ -121,6 +108,5 @@
 
         }, 2000);
     </script>
-
 </body>
 </html>
